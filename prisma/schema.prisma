@@ -14,8 +14,48 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  clerkId   String   @unique
-  createdAt DateTime @default(now())
+  id            Int             @id @default(autoincrement())
+  email         String          @unique
+  clerkId       String          @unique
+  createdAt     DateTime        @default(now())
+  Queries       Query[]
+  UserClassroom UserClassroom[]
+}
+
+model Classroom {
+  id            Int             @id @default(autoincrement())
+  createdAt     DateTime        @default(now())
+  videoId       String          @unique
+  title         String?
+  image_url     String?
+  transcript    String?
+  summary       String?
+  detailed_note String?
+  queries       Query[]
+  UserClassroom UserClassroom[]
+}
+
+model UserClassroom {
+  createdAt   DateTime  @default(now())
+  classroom   Classroom @relation(fields: [classroomId], references: [id])
+  classroomId Int
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  query       Query[]
+
+  @@id([userId, classroomId])
+}
+
+model Query {
+  id                       Int            @id @default(autoincrement())
+  createdAt                DateTime       @default(now())
+  query                    String
+  response                 String?
+  UserClassroom            UserClassroom? @relation(fields: [userClassroomUserId, userClassroomClassroomId], references: [userId, classroomId])
+  userClassroomUserId      Int?
+  userClassroomClassroomId Int?
+  User                     User?          @relation(fields: [userId], references: [id])
+  userId                   Int?
+  Classroom                Classroom?     @relation(fields: [classroomId], references: [id])
+  classroomId              Int?
 }

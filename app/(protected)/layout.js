@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
         <div className="lg:hidden">
           <MobileNavigation currentPath={pathName} />
         </div>
-        <div className="hidden lg:block">
+        <div className="sticky left-0 top-0 h-svh hidden lg:block">
           <SidebarNavigation currentPath={pathName} />
         </div>
       </nav>

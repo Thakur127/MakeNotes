@@ -1,22 +1,43 @@
 import { navLinks } from "@/constants/navLinks";
+import { axiosInstance } from "@/lib/axios";
 import { cn } from "@/lib/utils";
 import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
+import { ChevronDownIcon, ChevronRightIcon, SchoolIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
+import { Separator } from "../ui/separator";
+import SkeletonForClassroomList from "../Skeletons/SkeletonForClassroomList";
 
-const SidebarNavigation = ({ currentPath, currentUser }) => {
+const SidebarNavigation = ({ currentPath }) => {
+  const [showClasses, setShowClasses] = useState(false);
+
   const { user } = useUser();
+  // console.log(user);
+
+  const { data: availableClassrooms } = useQuery({
+    queryKey: ["available-classrooms"],
+    queryFn: async () => {
+      const res = await axiosInstance.get("/classrooms/retrieve", {
+        params: { userId: user.id },
+      });
+      // console.log(res);
+      return res.data;
+    },
+  });
+
+  // console.log(availableClassrooms);
 
   return (
-    <div className="bg-gray-50/50 h-svh p-4 flex flex-col">
+    <div className="bg-gray-50/50 h-svh p-4 flex flex-col overflow-hidden border-r">
       <section>
         <h1 className="font-bold text-2xl">
-          Make<span className="text-green-600">Notes</span>
+          <span className="text-green-500">notes.</span>
         </h1>
       </section>
       <section className="mt-4 flex-1">
         <ol className="space-y-1">
-          {navLinks.map((item, idx) => {
+          {navLinks.slice(0, 1).map((item, idx) => {
             return (
               <li key={idx}>
                 <Link
@@ -25,7 +46,72 @@ const SidebarNavigation = ({ currentPath, currentUser }) => {
                     "flex gap-2 p-4 rounded-lg cursor-pointer",
                     currentPath == item.href
                       ? "bg-green-400"
-                      : "hover:bg-green-200/40"
+                      : "hover:bg-green-100"
+                  )}
+                >
+                  {item.icon}
+                  {item.name}
+                </Link>
+              </li>
+            );
+          })}
+
+          <li>
+            <div
+              onClick={() => {
+                setShowClasses(!showClasses);
+              }}
+              className={cn(
+                "flex justify-between items-center p-4 cursor-pointer rounded-lg",
+                !showClasses && currentPath.startsWith("/classroom")
+                  ? "bg-green-400"
+                  : "hover:bg-green-100"
+              )}
+            >
+              <div className="flex gap-2">
+                <SchoolIcon size={24} />
+                <p>Classrooms</p>
+              </div>
+              {showClasses ? <ChevronDownIcon /> : <ChevronRightIcon />}
+            </div>
+            {showClasses && (
+              <ol className="space-y-2 ml-4 overflow-auto max-h-96 2xl:max-h-[600px] mt-2">
+                {availableClassrooms ? (
+                  availableClassrooms?.map((item, idx) => {
+                    // console.log(item);
+                    return (
+                      <li key={idx}>
+                        <Link
+                          href={"/classroom/" + item.id}
+                          className={cn(
+                            `ml-2 text-sm p-2 px-3 flex rounded-lg`,
+                            currentPath === "/classroom/" + item.id
+                              ? "bg-green-300"
+                              : "hover:bg-green-100/60"
+                          )}
+                        >
+                          {item.title}
+                        </Link>
+                      </li>
+                    );
+                  })
+                ) : (
+                  <SkeletonForClassroomList />
+                )}
+              </ol>
+            )}
+          </li>
+          <Separator />
+          {navLinks.slice(1).map((item, idx) => {
+            return (
+              <li key={idx}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex gap-2 p-4 rounded-lg cursor-pointer",
+                    currentPath == item.href
+                      ? "bg-green-400"
+                      : "hover:bg-green-100"
                   )}
                 >
                   {item.icon}

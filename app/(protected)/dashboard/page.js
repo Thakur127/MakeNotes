@@ -1,15 +1,22 @@
+import MyClassrooms from "@/components/MyClassrooms";
+import { Separator } from "@/components/ui/separator";
 import VideourlForm from "@/components/VideourlForm";
-import React from "react";
 
-const page = () => {
+const Page = async () => {
   return (
     <div className="p-4">
-      <section className="">
-        <h3 className="font-semibold text-lg">Paste video url to start</h3>
+      <section className="mt-2 mb-4">
+        <h3 className="font-semibold text-lg text-gray-800">
+          Paste video url to start
+        </h3>
         <VideourlForm />
+      </section>
+      <Separator />
+      <section className="mt-4">
+        <MyClassrooms />
       </section>
     </div>
   );
 };
 
-export default page;
+export default Page;
