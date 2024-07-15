@@ -1,5 +1,5 @@
 const MaxWidthWrapper = ({ children }) => {
-  return <div className="container max-w-7xl px-0">{children}</div>;
+  return <div className="container max-w-[1440px] px-0">{children}</div>;
 };
 
 export default MaxWidthWrapper;

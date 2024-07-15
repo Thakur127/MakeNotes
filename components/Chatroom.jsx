@@ -1,4 +1,4 @@
-import { SendHorizonalIcon, User } from "lucide-react";
+import { InfoIcon, SendHorizonalIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import ChatDisplay from "./ChatDisplay";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -59,7 +59,7 @@ const Chatroom = ({ classroomId }) => {
       const chat = generativeModel.startChat({
         history: chatHistory.slice(-10),
       });
-      const promptQuery = `Use the following pieces of context to answer the question. You must not answer a question not related to the documents. If you don't know the answer, just say "Unfortunately, I can't help you with that", don't try to make up an answer.
+      const promptQuery = `Use the following pieces of context to answer the question. You must not answer a question not related to the documents. If you don't know the answer, just say "Unfortunately, I can't help you with that", don't try to make up an answer. Your answer should be descriptive.
 
         CONTEXT: ${context}\n\n
         QUESION: ${newQuery}`;
@@ -114,6 +114,15 @@ const Chatroom = ({ classroomId }) => {
   return (
     <div className="flex max-h-svh h-svh flex-col p-4 space-y-4">
       <div className="border flex flex-col flex-1 overflow-auto rounded-md bg-gray-100 space-y-2 p-4">
+        <div className="w-full relative">
+          <h3 className="text-center">Question/Answer</h3>
+          <div className="group absolute top-0 right-0 cursor-pointer">
+            <InfoIcon size={12} className="cursor-pointer" />
+            <span className="hidden text-xs text-gray-700 group-hover:block absolute top-0 right-6 border bg-white p-2 rounded-md min-w-fit transition-all">
+              Ask standalone questions for better response.
+            </span>
+          </div>
+        </div>
         <div className="flex-1 space-y-2">
           {chatHistory?.map((chat, idx) => {
             return (

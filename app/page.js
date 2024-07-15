@@ -1,3 +1,4 @@
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import How from "@/components/How";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
@@ -43,24 +44,17 @@ export default function Home() {
       </MaxWidthWrapper>
       <MaxWidthWrapper>
         <main className="">
-          <section className="px-8 lg:px-56 text-center relative">
-            <Image
-              src={
-                "https://images.pexels.com/photos/236111/pexels-photo-236111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              }
-              alt=""
-              width={"1280"}
-              height={"0"}
-              className="object-contain absolute -z-50 top-0 left-0"
-            />
-            <h1 className="pt-20 md:pt-32 lg:pt-48 text-center text-3xl md:text-4xl lg:text-6xl font-bold">
-              Now, Making <span className="text-green-500">notes.</span> from
-              youtube videos have become{" "}
-              <span className="border-b-2 lg:border-b-4 border-green-500">
-                easier
-              </span>
-              .
-            </h1>
+          <section className="bg-[url(https://images.pexels.com/photos/236111/pexels-photo-236111.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] h-svh bg-no-repeat bg-center bg-cover bg-fixed flex justify-center flex-col items-center">
+            <div className="max-w-md md:max-w-lg lg:max-w-3xl">
+              <h1 className="text-center text-3xl md:text-4xl lg:text-6xl font-bold">
+                Now, Making <span className="text-green-500">notes.</span> from
+                youtube videos have become{" "}
+                <span className="border-b-2 lg:border-b-4 border-green-500">
+                  easier
+                </span>
+                .
+              </h1>
+            </div>
             <div className="mt-12">
               <SignedOut>
                 <Button asChild>
@@ -74,11 +68,14 @@ export default function Home() {
           <section className="mt-8 flex justify-center"></section>
         </main>
       </MaxWidthWrapper>
-      <div className="mt-16 sm:mt-44 md:mt-72 lg:mt-96">
+      <div className="mt-8">
         <How />
       </div>
       <div className="mt-8">
         <Pricing />
+      </div>
+      <div className="mt-8">
+        <FAQ />
       </div>
       <div className="mt-8">
         <Footer />
