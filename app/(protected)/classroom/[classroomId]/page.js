@@ -4,7 +4,6 @@ import { axiosInstance } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import ReactPlayer from "react-player/lazy";
 import RenderMarkdown from "@/components/RenderMarkdown";
-import RenderString from "@/components/RenderString";
 import {
   Accordion,
   AccordionContent,
@@ -66,7 +65,7 @@ const Page = ({ params }) => {
                   <h3 className="font-medium text-xl text-gray-900">Summary</h3>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-800 font-serif text-base">
-                  <RenderString content={classroom?.summary} />
+                  <RenderMarkdown content={classroom?.summary} />
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">

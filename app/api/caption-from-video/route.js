@@ -13,6 +13,8 @@ export async function GET(req) {
     });
   }
 
+  // console.log(process.env.RAPID_API_KEY);
+
   const options = {
     method: "GET",
     url: "https://youtube-captions-and-transcripts.p.rapidapi.com/getCaptions",
@@ -31,7 +33,7 @@ export async function GET(req) {
     const response = await axios.request(options);
     return new Response(JSON.stringify(response.data), { status: 200 });
   } catch (error) {
-    console.error(error);
+    // console.log(error);
     return new Response(JSON.stringify({ error: "Failed to fetch captions" }), {
       status: 500,
     });

@@ -111,6 +111,13 @@ const Chatroom = ({ classroomId }) => {
     queryResponse();
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   return (
     <div className="flex max-h-svh h-svh flex-col p-4 space-y-4">
       <div className="border flex flex-col flex-1 overflow-auto rounded-md bg-gray-100 space-y-2 p-4">
@@ -166,6 +173,7 @@ const Chatroom = ({ classroomId }) => {
               maxRows={8}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleKeyDown}
               required
               className="bg-white border w-full rounded-md p-2 px-4 outline-none pr-10 text-gray-800"
               placeholder="Write your queries here"
