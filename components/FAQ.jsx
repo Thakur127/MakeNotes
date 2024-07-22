@@ -56,7 +56,7 @@ const FAQ = () => {
             </p>
             <ol className="indent-4 list-decimal list-inside space-y-1">
               <li>
-                <span className="font-semibold">Enter YouTube Url:</span> GOn
+                <span className="font-semibold">Enter YouTube Url:</span> Go on
                 the dashboard, input the video URL into the provided input box.
               </li>
               <li>
