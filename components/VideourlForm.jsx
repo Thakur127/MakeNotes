@@ -48,7 +48,7 @@ const VideourlForm = () => {
             },
           });
           // console.log(data);
-          transcript = await makeTranscript(data.data);
+          transcript = await makeTranscript(data);
         } catch (error) {
           console.log("Failed for fetch captions for video: ", videoId);
           throw error;

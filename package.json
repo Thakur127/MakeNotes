@@ -43,7 +43,8 @@
     "svix": "^1.24.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "youtube-transcript": "^1.2.1"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.50.1",
