@@ -36,8 +36,8 @@ export async function GET(req) {
     console.log(res);
     return new Response(JSON.stringify(res), { status: 200 });
   } catch (error) {
-    // console.log(error);
-    return new Response(JSON.stringify({ error: "Failed to fetch captions" }), {
+    console.log(error);
+    return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
     });
   }
